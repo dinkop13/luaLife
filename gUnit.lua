@@ -203,6 +203,18 @@ function unit.bigDATA()
     io.close( file )
 end
 
+function unit.HEXfind( HEX )
+	error_msg = "can't find array"
+	
+	for i=1, array.counter do
+		
+		if array[i].HEXname == HEX then
+			return array[i]
+		else
+			return error_msg
+		end
+	end
+end
 --===============================================================================================================
 -- Функции преобразования 
 
