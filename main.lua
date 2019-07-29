@@ -1,7 +1,11 @@
 gens = require("gUnit")
+ui = require("UIUnit")
+game = require("gameUnit")
 
-gens.gensDataInit({genN = 32})
-gens.gensDataRead()
-gens.gensDataWrite()
-gens.dataSave()
-gens.bigDATA()
+option = {
+	X_SIZE = 128,
+	Y_SIZE = 64,
+}
+
+game.start(option)
+ui.start(option)
