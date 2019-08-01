@@ -1,75 +1,32 @@
-gens = require("gUnit")
-ui = require("UIUnit")
-game = require("gameUnit")
+run = require("runUnit")
 
-zoom_state = 0
+u01 = display.newText("Press key to run :\n",
+	display.contentCenterX, display.contentCenterY, "Anonymous_Pro.ttf", 22)
 
-option = {
-	X_SIZE = 128,
-	Y_SIZE = 64,
-}
+u02 = display.newText("> t - to run test\n> w - to run gens.txt\n> n - to run new generation\n> x - лучше блять не трогай",
+	display.contentCenterX, display.contentCenterY+ 60 , "Anonymous_Pro.ttf", 22)
+u02 : setFillColor( 0.3 )
 
-game.start(option)
-ui.start(option)
+		local function onKeyEvent( event )
+		 
+		    if ( event.keyName == "t" ) and ( event.phase == "down") then
 
+		    	run.test()
 
-function step()
-	
+		    	Runtime:removeEventListener( "key", onKeyEvent )
 
-	game.step()
-	ui.upd(game.getf())
+		    	u01:removeSelf()
+		    	u02:removeSelf()
 
-end
+		    elseif ( event.keyName == "w" ) and ( event.phase == "down") then
 
-loop = timer.performWithDelay( 400, step, 0 )
+		    elseif ( event.keyName == "n" ) and ( event.phase == "down") then
 
-function play( speed )
-		timer.cancel(loop)
+		    elseif ( event.keyName == "x" ) and ( event.phase == "down") then
 
-		local loop = timer.performWithDelay( 1100 - 100*speed, step, 0 )
-end
+		    end
+		 
+		    return false
+		end
 
-local function onKeyEvent( event )
-    --print( "Key '" .. event.keyName .. "' was pressed " .. event.phase )
- 
-    if ( event.keyName == "down" ) and ( event.phase == "down") then
-    	print("d")
-
-    	ui.cells.mainGrp.y = ui.cells.mainGrp.y - 20 * zoom_state
-
-    elseif ( event.keyName == "up" ) and ( event.phase == "down") then
-    	print("u")
-
-    	ui.cells.mainGrp.y = ui.cells.mainGrp.y + 20 * zoom_state
-
-    elseif ( event.keyName == "left" ) and ( event.phase == "down") then
-    	print("l")
-
-    	ui.cells.mainGrp.x = ui.cells.mainGrp.x + 20 * zoom_state
-
-    elseif ( event.keyName == "right" ) and ( event.phase == "down") then
-    	print("r")
-
-    	ui.cells.mainGrp.x = ui.cells.mainGrp.x - 20 * zoom_state
-
-    elseif ( event.keyName == "+" ) and ( event.phase == "down") then
-    	print("+")
-
-    	if zoom_state < 10 then
-    		ui.cells.mainGrp:scale(1.2, 1.2)
-    			zoom_state = zoom_state + 1
-    	end
-
-    elseif ( event.keyName == "-" ) and ( event.phase == "down") then
-    	print("-")
-
-    	if zoom_state > 0 then
-    		ui.cells.mainGrp:scale(0.8, 0.8)
-    			zoom_state = zoom_state - 1
-    	end
-    end
- 
-    return false
-end
-
-Runtime:addEventListener( "key", onKeyEvent )
+		Runtime:addEventListener( "key", onKeyEvent )
