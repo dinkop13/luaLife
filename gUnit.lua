@@ -1,6 +1,4 @@
--- TO DO :
--- 1 : сделать что нибудь с этой таблицей {{1}}
--- : Сделать функции отбора и мутации 
+c 	= require("consolUnit")
 
 local unit = {}
 
@@ -29,7 +27,7 @@ end
 -- Функции работы с датой
 
 function unit.genInit( params ) -- Создание генов
-	local gen = {} --{{1}}
+	local gen = {}
 
 	local genStr = ""
 	local HEX = ""

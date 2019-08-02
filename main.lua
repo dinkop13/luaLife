@@ -1,22 +1,30 @@
-run = require("runUnit")
+run = require("runUnit") -- модуль сборки модулей интерфейса и цикла
+c 	= require("consolUnit")
 
-u01 = display.newText("Press key to run :\n",
-	display.contentCenterX, display.contentCenterY, "Anonymous_Pro.ttf", 22)
+c.start() -- старт консоли 
 
-u02 = display.newText("> t - to run test\n> w - to run gens.txt\n> n - to run new generation\n> x - лучше блять не трогай",
-	display.contentCenterX, display.contentCenterY+ 60 , "Anonymous_Pro.ttf", 22)
-u02 : setFillColor( 0.3 )
+c.out("")
+c.out("Press button to select run mode :")
+c.out("    > t - run test mode")
 
-		local function onKeyEvent( event )
+		local function onKeyEvent( event ) -- отрабочик нажатий в  менюшки 
 		 
-		    if ( event.keyName == "t" ) and ( event.phase == "down") then
+		    if ( event.keyName == "t" ) then --тестовый режим запуска 
+		    																							--TODO начать пилить запуск с файла 
 
-		    	run.test()
+		    	if event.phase == "down"  then
+		    		c.out("")
+		    		c.out(".. START .test()") -- log
 
-		    	Runtime:removeEventListener( "key", onKeyEvent )
+		    	elseif event.phase == "up" then 
+			    	run.test() --Старт сборки теста 
+			    	c.out(".. OK") -- log
+			    	c.out("___________________________________________________________________________")
+			    	c.out(" Use arrows to scroll map and +/- to zoom")
 
-		    	u01:removeSelf()
-		    	u02:removeSelf()
+			    	Runtime:removeEventListener( "key", onKeyEvent )
+
+			    end
 
 		    elseif ( event.keyName == "w" ) and ( event.phase == "down") then
 

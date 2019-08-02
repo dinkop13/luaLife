@@ -1,3 +1,5 @@
+c 	= require("consolUnit")
+
 local unit = {}
 
 	unit.ITER = 0
@@ -266,6 +268,8 @@ local unit = {}
 		foodInit(unit.array.params)
 
 		unit.stats()
+
+		c.out(".. .. OK")
 	end
 
 return unit

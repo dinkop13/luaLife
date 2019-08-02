@@ -1,4 +1,5 @@
-game = require("gameUnit")
+c 		= require("consolUnit")
+game 	= require("gameUnit")
 
 local unit = {}
 
@@ -15,6 +16,9 @@ local unit = {}
 	unit.cells.mainGrp = display.newGroup()
 
 	unit.cells.WIN = display.newGroup()
+	unit.cells.console = display.newGroup()
+
+
 
 
 	function cellsInit( x, y, field )
@@ -56,7 +60,7 @@ local unit = {}
 					unit.cells.foodGrp ,
 					(-(((x/2)-1)*10) + ((i-1)*10)),
 					(-(((y/2)-1)*10) + ((j-1)*10)),
-					2
+					3
 				)
 				unit.cells.food[i][j]:setFillColor(((120 + (100/ field[i][j].color)) / 255) , 1 , 0.3)
 
@@ -68,19 +72,12 @@ local unit = {}
 				)
 				unit.cells.bytes[i][j]:setFillColor(1,0.5,0)
 
-				display.newText( 
-					unit.cells.bGrp ,
-					"00",
-					(-(((x/2)-1)*10) + ((i-1)*10)),
-					(-(((y/2)-1)*10) + ((j-1)*10)),
-					"Anonymous_Pro.ttf",
-					6
-				)
-
 					unit.cells.food[i][j].alpha = 0
 					unit.cells.bytes[i][j].alpha = 0
 			end
 		end
+
+		c.out(".. .. .. cell create") -- создание клеток 
 	end
 
 	function infoWinInit()
@@ -104,12 +101,13 @@ local unit = {}
 
 		unit.cells.WIN.x = 120
 		unit.cells.WIN.y = 220
+		c.out(".. .. .. stat win create") -- создание окна статуса 
 	end
 
 	function unit.winUpd(field)
 		
 		unit.label[4].text = "food -- " .. field.stats.food
-		unit.label[2].text = "iter -- " .. game.geti()
+		unit.label[2].text = "iter -- " .. game.geti() -- обновление окна статуса
 	end
 
 	function unit.upd(field)
@@ -130,12 +128,10 @@ local unit = {}
 			end
 		end
 
-		unit.winUpd(field)
+		unit.winUpd(field)-- обновление интера 
 	end
 
 	function unit.start(params)
-		print( os.date( "__ log %c" ) 	)
-		print( "!! UI INIT" )
 
 		fon = display.newRect( unit.cells.back , 700, 350, 2000, 2000 )
 			fon:setFillColor( 0.15 )
@@ -151,15 +147,14 @@ local unit = {}
 		unit.cells.mainGrp:insert( unit.cells.foodGrp )
 		unit.cells.mainGrp:insert( unit.cells.bGrp )
 
-		ui.cells.mainGrp.x = display.contentCenterX + 95
+		ui.cells.mainGrp.x = display.contentCenterX + 200
 		ui.cells.mainGrp.y = display.contentCenterY - 45 	
 
 		ui.cells.mainGrp.xScale = 0.8
     	ui.cells.mainGrp.yScale = 0.8 
 
-
-
-		--unit.cells.mainGrp:scale(1.6, 1.6)
+    	c.out(".. .. OK")
+		--unit.cells.mainGrp:scale(1.6, 1.6)старт интерфейса 
 	end
 
 return unit

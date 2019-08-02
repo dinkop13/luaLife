@@ -1,3 +1,4 @@
+c 		= require("consolUnit")
 gens 	= require("gUnit")
 ui 		= require("UIUnit")
 game 	= require("gameUnit")
@@ -17,7 +18,10 @@ local unit = {}
 			Y_SIZE = 64,
 		}
 
+		c.out(".. .. START game")
 		game.start(option)
+
+		c.out(".. .. START ui")
 		ui.start(option)
 
 		function step()
@@ -61,7 +65,7 @@ local unit = {}
 		    elseif ( event.keyName == "0" ) and ( event.phase == "down") then
 		    	print("0")
 
-		    		ui.cells.mainGrp.x = display.contentCenterX + 95
+		    		ui.cells.mainGrp.x = display.contentCenterX + 200
 					ui.cells.mainGrp.y = display.contentCenterY - 45 	
 
 		    elseif ( event.keyName == "+" ) and ( event.phase == "down") then
@@ -83,22 +87,16 @@ local unit = {}
 
 		    		ui.cells.mainGrp.xScale = 0.8 + (zoom_state/5)
 		    		ui.cells.mainGrp.yScale = 0.8 + (zoom_state/5)
-
-		    	elseif zoom_state == 1 then
-		    			zoom_state = zoom_state - 1
-
-		    		ui.cells.mainGrp.xScale = 0.8 + (zoom_state/5)
-		    		ui.cells.mainGrp.yScale = 0.8 + (zoom_state/5)
-
-		    		ui.cells.mainGrp.x = display.contentCenterX + 95
-					ui.cells.mainGrp.y = display.contentCenterY - 45 		
 		    	end
+
 		    end
 		 
 		    return false
 		end
 
 		Runtime:addEventListener( "key", onKeyEvent )
+
+		c.out(".. .. input start")
 	end
 
 return unit
